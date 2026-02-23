@@ -1,228 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Nuestra Historia, Mi Amor 💖</title>
+<meta charset="UTF-8" />
+<title>Te Amo</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(to top, #ff9ab9, #ffd6e8);
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        overflow: hidden;
+        font-family: "Century Gothic", sans-serif;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            font-family: 'Arial', sans-serif;
-            color: white;
-            text-align: center;
-        }
+    /* Pareja abrazada estilo silueta */
+    .pareja {
+        position: relative;
+        width: 160px;
+        height: 260px;
+        animation: caminar 3.5s infinite linear;
+    }
 
-        /* Fondo del parque */
-        body {
-            background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80') 
-            no-repeat center center fixed;
-            background-size: cover;
-        }
+    .chico, .chica {
+        position: absolute;
+        bottom: 0;
+        width: 80px;
+        height: 250px;
+        background: #2b2b2b;
+        border-radius: 40px;
+    }
 
-        /* Oscurecer un poco */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(1px);
-        }
+    .chico {
+        left: 0;
+        transform: rotate(-6deg);
+    }
 
-        /* Caja de historia */
-        .story-box {
-            position: relative;
-            margin-top: 80px;
-            padding: 30px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 20px;
-            width: 85%;
-            max-width: 750px;
-            margin-left: auto;
-            margin-right: auto;
-            backdrop-filter: blur(6px);
-        }
+    .chica {
+        right: 0;
+        transform: rotate(6deg);
+    }
 
-        h1 {
-            font-size: 40px;
-            text-shadow: 2px 2px 8px #000;
-        }
+    /* Corazón */
+    .corazon {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 60px;
+        animation: latir 1.2s infinite ease-in-out;
+    }
 
-        .story {
-            margin-top: 20px;
-            font-size: 22px;
-            white-space: pre-wrap;
-            line-height: 1.7;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
+    @keyframes latir {
+        0% { transform: translateX(-50%) scale(1); }
+        50% { transform: translateX(-50%) scale(1.3); }
+        100% { transform: translateX(-50%) scale(1); }
+    }
 
-        /* corazones */
-        .heart {
-            position: fixed;
-            color: pink;
-            font-size: 30px;
-            animation: floatUp 6s linear infinite;
-            opacity: 0.8;
-        }
+    /* Animación de caminar */
+    @keyframes caminar {
+        0% { transform: translateX(-50px); }
+        100% { transform: translateX(50px); }
+    }
 
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
-        }
-    </style>
+    /* Te amo */
+    .teamo {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 40px;
+        color: #ffffff;
+        text-shadow: 0 0 20px #ff006a;
+        opacity: 0;
+        animation: aparecer 3s forwards;
+        animation-delay: 1.5s;
+    }
+
+    @keyframes aparecer {
+        0% { opacity: 0; transform: translate(-50%, 20px); }
+        100% { opacity: 1; transform: translate(-50%, 0); }
+    }
+</style>
 </head>
-
 <body>
 
-    <div class="overlay"></div>
+<div class="corazon">❤️</div>
 
-    <div class="story-box">
-        <h1>Para Mi Amor 💖</h1>
-        <div id="story" class="story"></div>
-    </div>
+<div class="pareja">
+    <div class="chico"></div>
+    <div class="chica"></div>
+</div>
 
-    <script>
-        const text =
-`Capítulo 1
-Un día, un joven vivía una vida hermosa. Tenía de todo: dinero, amigos, su deporte favorito, una gran casa, una familia, una mascota. 
-Aparentemente era feliz… o eso creía.  
-Pero como todo en la vida, llegaron problemas.
-
-El joven se enamoró de una chica muy, pero MUY hermosa.  
-Buena estudiante, perfecta en todos los aspectos.  
-Pero él pensó que nunca tendría una oportunidad…  
-y decidió no decir nada.  
-Ese fue su mayor error.
-
-Siguió su vida…  
-hasta que alguien de mal corazón intentó cautivarlo.  
-Cayó en esa estupidez…  
-y sufrió demasiado.  
-Le rompieron su corazón de oro.  
-Un corazón tan valioso… que ni él mismo entendía cómo pudo lastimarse así.
-
-Capítulo 2
-Después del dolor, el joven tenía un viaje programado al exterior.  
-Dejó todo y se fue.  
-En ese viaje, decidió escribirle a aquella chica hermosa de sus sueños.  
-
-Le hablaba.  
-La pensaba.  
-Y hasta le compró un regalo para cuando regresara.
-
-Cuando volvió a su país… seguía en contacto con ella.  
-Y no se lo podía creer.
-
-Capítulo 3
-Cada día que pasaba en el colegio, él la veía.  
-La admiraba en secreto.  
-Llegaba a su casa feliz…  
-solo pensando en ella.  
-La amaba.  
-Pero le daba miedo.
-
-Un día, alguien le preguntó si le gustaba ella.  
-Él se asustó… y no respondió.  
-Otra oportunidad perdida.
-
-Capítulo 4
-Después de más días pensándola, decide invitarla a su casa un 25 de octubre.  
-Ese día, algo cambió.  
-Quería decirle lo que sentía…  
-pero los nervios lo vencieron.  
-Incluso le cerró la puerta sin querer en la cara.
-
-Rieron, disfrutaron, jugaron…  
-y cuando quedaron solos en un parque…  
-él quiso decirle que la amaba.  
-Quiso besarla.  
-Pero otra vez…  
-miedo.
-
-Cuando llegó la hora de irse…  
-él seguía sin poder hacerlo.  
-Hasta que, en un carro, por fin tuvo una oportunidad:
-le agarró la mano.  
-Y ahí todo cambió.  
-
-Esa noche hablaron…  
-y él decidió, por fin, decirle lo que sentía.
-
-Capítulo 5
-Desde ese 25 de octubre, comenzaron a salir, a disfrutar, a reír.  
-Pasaron los días…  
-y él decidió poner una fecha para hacerlo oficial.
-
-Ese día llegó.
-
-Desde entonces, él no para de amarla.  
-No para de admirarla.  
-No para de agradecerle por reconstruir su corazón roto.  
-Por devolverle el brillo.  
-Por hacerlo sentir vivo otra vez.
-
-Y ahora, mi amor…
-
-Quiero decirte algo más:
-
-Te amo con todo mi corazón.  
-Gracias por hacerme tan feliz.  
-Gracias por dejarme ser parte de tu vida,  
-por permitirme ser el hombre que te dará todo.
-
-Gracias por tus regalitos,  
-por cada detalle,  
-por cada beso,  
-por cada caricia,  
-por cada momento.
-
-Me hace feliz tocarte, besarte y sentirte.  
-Te amo demasiado.
-
-No te vayas nunca.
-
-Me quité mi chaleco antibalas  
-para poder amarte mejor…  
-por favor no vayas a disparar.
-
-Te amo como a nadie.  
-Te amo al infinito…  
-y más allá. 💖`;
-
-        let i = 0;
-        const speed = 38;
-        function typeStory() {
-            if (i < text.length) {
-                const storyDiv = document.getElementById("story");
-                storyDiv.style.opacity = 1;
-                storyDiv.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeStory, speed);
-            }
-        }
-        typeStory();
-    </script>
-
-    <script>
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "💗";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = (5 + Math.random() * 4) + "s";
-
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 8000);
-        }
-
-        setInterval(createHeart, 500);
-    </script>
+<div class="teamo">Te amo</div>
 
 </body>
 </html>
