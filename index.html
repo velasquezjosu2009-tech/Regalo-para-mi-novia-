@@ -3,80 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pingu Latidor</title>
+<title>Avión Mensaje de Amor</title>
 
 <style>
-body {
-    margin: 0;
-    background: #0a0a2a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-}
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(#7ecbff, #c9eaff);
+        font-family: Arial, sans-serif;
+    }
 
-/* Contenedor general */
-.container {
-    position: relative;
-    width: 350px;
-}
+    /* Sol */
+    .sun {
+        position: absolute;
+        top: 50px;
+        right: 60px;
+        width: 140px;
+        height: 140px;
+        background: yellow;
+        border-radius: 50%;
+        box-shadow: 0 0 40px yellow;
+        animation: brillar 3s infinite alternate ease-in-out;
+    }
 
-/* Imagen base */
-.pingu {
-    width: 100%;
-    display: block;
-    position: relative;
-    z-index: 10;
-}
+    @keyframes brillar {
+        from { transform: scale(1); }
+        to { transform: scale(1.15); }
+    }
 
-/* Corazón latiendo */
-.corazon {
-    position: absolute;
-    top: 160px;  
-    left: 50%;
-    transform: translateX(-50%);
-    width: 160px;
-    animation: latir 1s infinite ease-in-out;
-}
+    /* Avión */
+    .avion {
+        position: absolute;
+        top: 45%;
+        left: -200px;
+        width: 180px;
+        animation: volar 10s linear infinite;
+        z-index: 5;
+    }
 
-@keyframes latir {
-    0% { transform: translateX(-50%) scale(1); }
-    50% { transform: translateX(-50%) scale(1.12); }
-    100% { transform: translateX(-50%) scale(1); }
-}
+    @keyframes volar {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(140vw); }
+    }
 
-/* Animación del beso */
-.beso {
-    position: absolute;
-    font-size: 40px;
-    top: 220px; 
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    animation: beso 2s infinite ease-out;
-}
+    /* Humo del mensaje */
+    .humo {
+        position: absolute;
+        top: 50%;
+        left: -300px;
+        font-size: 55px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 4px 4px 8px #3f3f3f;
+        letter-spacing: 8px;
+        animation: escribir 10s linear infinite;
+        white-space: nowrap;
+    }
 
-@keyframes beso {
-    0% { opacity: 0; transform: translate(-50%, 0) scale(0.5); }
-    30% { opacity: 1; transform: translate(-50%, -40px) scale(1); }
-    100% { opacity: 0; transform: translate(-50%, -120px) scale(1.2); }
-}
+    @keyframes escribir {
+        0% { transform: translateX(0); opacity: 0; }
+        20% { opacity: 1; }
+        100% { transform: translateX(150vw); opacity: 1; }
+    }
 </style>
 
 </head>
 <body>
 
-<div class="container">
-    <!-- Reemplaza esta ruta por tu imagen -->
-    <img src="pingu.png" class="pingu">
+    <!-- Sol bonito animado -->
+    <div class="sun"></div>
 
-    <!-- Corazón que late -->
-    <img src="corazon.png" class="corazon">
+    <!-- Avión PNG (puedes cambiarlo si quieres otro estilo) -->
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" class="avion">
 
-    <!-- Beso saliendo -->
-    <div class="beso">💋</div>
-</div>
+    <!-- Mensaje del humo -->
+    <div class="humo">TE AMO MUCHO ❤️</div>
 
 </body>
 </html>
