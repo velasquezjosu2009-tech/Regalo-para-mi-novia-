@@ -2,46 +2,98 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Te Amo Mucho Mi Amor</title>
+<title>Pingüino Te Amo</title>
+
 <style>
     body {
         margin: 0;
-        padding: 0;
         height: 100vh;
-        background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80");
+        background: url("https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1400&q=80");
         background-size: cover;
         background-position: center;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: "Arial", sans-serif;
+        flex-direction: column;
         overflow: hidden;
+        font-family: Arial, sans-serif;
     }
 
-    h1 {
-        font-size: 65px;
+    /* Pingüino */
+    .pinguino {
+        width: 200px;
+        animation: rebotar 2s ease-in-out infinite;
+    }
+
+    @keyframes rebotar {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-25px); }
+        100% { transform: translateY(0); }
+    }
+
+    /* Corazón */
+    .corazon {
+        width: 260px;
+        height: 230px;
+        background: red;
+        position: relative;
+        transform: rotate(-45deg);
+        margin-top: 20px;
+        animation: latir 1.5s infinite ease-in-out;
+    }
+
+    .corazon:before,
+    .corazon:after {
+        content: "";
+        width: 260px;
+        height: 230px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .corazon:before {
+        top: -130px;
+        left: 0;
+    }
+
+    .corazon:after {
+        left: 130px;
+        top: 0;
+    }
+
+    @keyframes latir {
+        0% { transform: scale(1) rotate(-45deg); }
+        50% { transform: scale(1.15) rotate(-45deg); }
+        100% { transform: scale(1) rotate(-45deg); }
+    }
+
+    /* Texto */
+    .texto {
+        position: absolute;
+        top: 54%;
+        transform: translateY(-50%);
         color: white;
-        text-shadow: 0 0 20px #000, 0 0 35px #ff7f9f;
+        font-size: 50px;
+        font-weight: bold;
+        text-shadow: 0 0 10px #ffb3c6, 0 0 25px #ff1f4c;
         animation: aparecer 3s ease-in-out infinite alternate;
-        text-align: center;
-        padding: 20px;
     }
 
     @keyframes aparecer {
-        from {
-            transform: scale(0.9);
-            opacity: 0.8;
-        }
-        to {
-            transform: scale(1.05);
-            opacity: 1;
-        }
+        from { opacity: 0.7; transform: scale(0.95) translateY(-50%); }
+        to { opacity: 1; transform: scale(1.05) translateY(-50%); }
     }
 </style>
 </head>
+
 <body>
 
-<h1>TE AMO MUCHO MI AMOR</h1>
+<img class="pinguino" src="https://i.imgur.com/5cXyQeC.png">
+
+<div class="corazon"></div>
+
+<div class="texto">TE AMO</div>
 
 </body>
 </html>
