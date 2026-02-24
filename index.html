@@ -2,100 +2,46 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Corazón LEGO - Te Amo</title>
+<title>Te Amo Mucho Mi Amor</title>
 <style>
     body {
         margin: 0;
-        background: url('https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=1350&q=80');
+        padding: 0;
+        height: 100vh;
+        background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80");
         background-size: cover;
         background-position: center;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        font-family: Arial, sans-serif;
+        font-family: "Arial", sans-serif;
+        overflow: hidden;
     }
 
-    .contenedor {
-        position: relative;
-        width: 320px;
-        height: 320px;
-    }
-
-    /* Bloques LEGO */
-    .bloque {
-        width: 40px;
-        height: 40px;
-        background: #ff2e63;
-        border-radius: 6px;
-        box-shadow: 0 4px 0 #b41641;
-        position: absolute;
-        opacity: 0;
-        transform: scale(0.3);
-        transition: 0.4s ease-in-out;
-    }
-
-    /* Texto central */
-    .texto {
-        position: absolute;
-        top: 42%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 50px;
-        font-weight: bold;
+    h1 {
+        font-size: 65px;
         color: white;
-        text-shadow: 0 0 15px #ffffff, 0 0 25px #ff2e63;
-        opacity: 0;
-        transition: 1s ease-in-out;
+        text-shadow: 0 0 20px #000, 0 0 35px #ff7f9f;
+        animation: aparecer 3s ease-in-out infinite alternate;
+        text-align: center;
+        padding: 20px;
+    }
+
+    @keyframes aparecer {
+        from {
+            transform: scale(0.9);
+            opacity: 0.8;
+        }
+        to {
+            transform: scale(1.05);
+            opacity: 1;
+        }
     }
 </style>
 </head>
 <body>
 
-<div class="contenedor" id="corazon"></div>
-<div class="texto" id="texto">TE AMO</div>
-
-<script>
-const mapa = [
-"00111100",
-"01111110",
-"11111111",
-"11111111",
-"11111111",
-"01111110",
-"00111100",
-"00011000"
-];
-
-const contenedor = document.getElementById("corazon");
-
-let delay = 0;
-
-/* Crear bloques */
-mapa.forEach((fila, y) => {
-    [...fila].forEach((val, x) => {
-        if (val === "1") {
-            const b = document.createElement("div");
-            b.classList.add("bloque");
-            b.style.left = (x * 40) + "px";
-            b.style.top  = (y * 40) + "px";
-            contenedor.appendChild(b);
-
-            setTimeout(() => {
-                b.style.opacity = 1;
-                b.style.transform = "scale(1)";
-            }, delay);
-
-            delay += 120;
-        }
-    });
-});
-
-/* Mostrar texto */
-setTimeout(() => {
-    document.getElementById("texto").style.opacity = 1;
-}, delay + 500);
-</script>
+<h1>TE AMO MUCHO MI AMOR</h1>
 
 </body>
 </html>
