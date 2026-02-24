@@ -1,99 +1,82 @@
-        <!DOCTYPE html>
+                <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Pingüino Te Amo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pingu Latidor</title>
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        background: url("https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1400&q=80");
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        overflow: hidden;
-        font-family: Arial, sans-serif;
-    }
+body {
+    margin: 0;
+    background: #0a0a2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
 
-    /* Pingüino */
-    .pinguino {
-        width: 200px;
-        animation: rebotar 2s ease-in-out infinite;
-    }
+/* Contenedor general */
+.container {
+    position: relative;
+    width: 350px;
+}
 
-    @keyframes rebotar {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-25px); }
-        100% { transform: translateY(0); }
-    }
+/* Imagen base */
+.pingu {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 10;
+}
 
-    /* Corazón */
-    .corazon {
-        width: 260px;
-        height: 230px;
-        background: red;
-        position: relative;
-        transform: rotate(-45deg);
-        margin-top: 20px;
-        animation: latir 1.5s infinite ease-in-out;
-    }
+/* Corazón latiendo */
+.corazon {
+    position: absolute;
+    top: 160px;  
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    animation: latir 1s infinite ease-in-out;
+}
 
-    .corazon:before,
-    .corazon:after {
-        content: "";
-        width: 260px;
-        height: 230px;
-        background: red;
-        border-radius: 50%;
-        position: absolute;
-    }
+@keyframes latir {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.12); }
+    100% { transform: translateX(-50%) scale(1); }
+}
 
-    .corazon:before {
-        top: -130px;
-        left: 0;
-    }
+/* Animación del beso */
+.beso {
+    position: absolute;
+    font-size: 40px;
+    top: 220px; 
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: beso 2s infinite ease-out;
+}
 
-    .corazon:after {
-        left: 130px;
-        top: 0;
-    }
-
-    @keyframes latir {
-        0% { transform: scale(1) rotate(-45deg); }
-        50% { transform: scale(1.15) rotate(-45deg); }
-        100% { transform: scale(1) rotate(-45deg); }
-    }
-
-    /* Texto */
-    .texto {
-        position: absolute;
-        top: 54%;
-        transform: translateY(-50%);
-        color: white;
-        font-size: 50px;
-        font-weight: bold;
-        text-shadow: 0 0 10px #ffb3c6, 0 0 25px #ff1f4c;
-        animation: aparecer 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes aparecer {
-        from { opacity: 0.7; transform: scale(0.95) translateY(-50%); }
-        to { opacity: 1; transform: scale(1.05) translateY(-50%); }
-    }
+@keyframes beso {
+    0% { opacity: 0; transform: translate(-50%, 0) scale(0.5); }
+    30% { opacity: 1; transform: translate(-50%, -40px) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -120px) scale(1.2); }
+}
 </style>
-</head>
 
+</head>
 <body>
 
-<img class="pinguino" src="https://i.imgur.com/5cXyQeC.png">
+<div class="container">
+    <!-- Reemplaza esta ruta por tu imagen -->
+    <img src="pingu.png" class="pingu">
 
-<div class="corazon"></div>
+    <!-- Corazón que late -->
+    <img src="corazon.png" class="corazon">
 
-<div class="texto">TE AMO</div>
+    <!-- Beso saliendo -->
+    <div class="beso">💋</div>
+</div>
 
 </body>
 </html>
