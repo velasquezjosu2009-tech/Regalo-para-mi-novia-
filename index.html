@@ -1,84 +1,109 @@
-              <!DOCTYPE html>
+                      <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avión Mensaje de Amor</title>
-
+<title>Carro del Amor</title>
 <style>
     body {
         margin: 0;
-        height: 100vh;
         overflow: hidden;
-        background: linear-gradient(#7ecbff, #c9eaff);
+        background: linear-gradient(to bottom, #87CEFA, #ffffff);
         font-family: Arial, sans-serif;
     }
-
-    /* Sol */
-    .sun {
+    #carro {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        width: 80px;
+        transform: translateX(-50%);
+    }
+    .corazon {
+        position: absolute;
+        width: 40px;
+        animation: caer 4s linear infinite;
+    }
+    @keyframes caer {
+        0% { top: -50px; }
+        100% { top: 100vh; }
+    }
+    #puntos {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 25px;
+        font-weight: bold;
+        color: #ff0066;
+    }
+    #mensaje {
         position: absolute;
         top: 50px;
-        right: 60px;
-        width: 140px;
-        height: 140px;
-        background: yellow;
-        border-radius: 50%;
-        box-shadow: 0 0 40px yellow;
-        animation: brillar 3s infinite alternate ease-in-out;
-    }
-
-    @keyframes brillar {
-        from { transform: scale(1); }
-        to { transform: scale(1.15); }
-    }
-
-    /* Avión */
-    .avion {
-        position: absolute;
-        top: 45%;
-        left: -200px;
-        width: 180px;
-        animation: volar 10s linear infinite;
-        z-index: 5;
-    }
-
-    @keyframes volar {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(140vw); }
-    }
-
-    /* Humo del mensaje */
-    .humo {
-        position: absolute;
-        top: 50%;
-        left: -300px;
-        font-size: 55px;
+        left: 10px;
+        font-size: 20px;
+        color: #d00055;
         font-weight: bold;
-        color: white;
-        text-shadow: 4px 4px 8px #3f3f3f;
-        letter-spacing: 8px;
-        animation: escribir 10s linear infinite;
-        white-space: nowrap;
-    }
-
-    @keyframes escribir {
-        0% { transform: translateX(0); opacity: 0; }
-        20% { opacity: 1; }
-        100% { transform: translateX(150vw); opacity: 1; }
     }
 </style>
-
 </head>
 <body>
 
-    <!-- Sol bonito animado -->
-    <div class="sun"></div>
+<div id="puntos">Puntos: 0</div>
+<div id="mensaje"></div>
 
-    <!-- Avión PNG (puedes cambiarlo si quieres otro estilo) -->
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" class="avion">
+<img id="carro" src="https://i.imgur.com/4T5CwCx.png">
 
-    <!-- Mensaje del humo -->
-    <div class="humo">TE AMO MUCHO ❤️</div>
+<script>
+    let carro = document.getElementById("carro");
+    let puntos = 0;
+    let mensaje = document.getElementById("mensaje");
+
+    let frases = [
+        "Eres mi destino ❤️",
+        "Te amo demasiado 🚗💘",
+        "Tu amor me guía siempre ✨",
+        "Conduces mi corazón 💖",
+        "Eres mi ruta favorita 💞"
+    ];
+
+    // Movimiento del carro
+    document.addEventListener("mousemove", (e) => {
+        carro.style.left = e.clientX - 40 + "px";
+    });
+
+    // Crear corazones
+    function crearCorazon() {
+        let corazon = document.createElement("img");
+        corazon.src = "https://i.imgur.com/ZKQ7jvM.png";
+        corazon.classList.add("corazon");
+        corazon.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(corazon);
+
+        let caer = setInterval(() => {
+            let corazonRect = corazon.getBoundingClientRect();
+            let carroRect = carro.getBoundingClientRect();
+
+            // Colisión
+            if (
+                corazonRect.bottom >= carroRect.top &&
+                corazonRect.left < carroRect.right &&
+                corazonRect.right > carroRect.left
+            ) {
+                puntos++;
+                document.getElementById("puntos").innerText = "Puntos: " + puntos;
+                mensaje.innerText = frases[Math.floor(Math.random() * frases.length)];
+                corazon.remove();
+                clearInterval(caer);
+            }
+
+            // Si desaparece abajo
+            if (corazonRect.top > window.innerHeight) {
+                corazon.remove();
+                clearInterval(caer);
+            }
+        }, 50);
+    }
+
+    setInterval(crearCorazon, 1200);
+</script>
 
 </body>
 </html>
