@@ -1,109 +1,81 @@
-                      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Carro del Amor</title>
-<style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        background: linear-gradient(to bottom, #87CEFA, #ffffff);
-        font-family: Arial, sans-serif;
-    }
-    #carro {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        width: 80px;
-        transform: translateX(-50%);
-    }
-    .corazon {
-        position: absolute;
-        width: 40px;
-        animation: caer 4s linear infinite;
-    }
-    @keyframes caer {
-        0% { top: -50px; }
-        100% { top: 100vh; }
-    }
-    #puntos {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 25px;
-        font-weight: bold;
-        color: #ff0066;
-    }
-    #mensaje {
-        position: absolute;
-        top: 50px;
-        left: 10px;
-        font-size: 20px;
-        color: #d00055;
-        font-weight: bold;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de las Tres Cajas</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .box {
+            width: 120px;
+            height: 120px;
+            background: #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: 0.3s;
+            border: 2px solid #aaa;
+        }
+
+        .box:hover {
+            background: #ccc;
+            transform: scale(1.05);
+        }
+
+        #mensaje {
+            margin-top: 40px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<div id="puntos">Puntos: 0</div>
-<div id="mensaje"></div>
+    <h1>Juego de las Tres Cajas</h1>
 
-<img id="carro" src="https://i.imgur.com/4T5CwCx.png">
+    <div class="container">
+        <div class="box" onclick="abrirCaja(1)">Caja 1</div>
+        <div class="box" onclick="abrirCaja(2)">Caja 2</div>
+        <div class="box" onclick="abrirCaja(3)">Caja 3</div>
+    </div>
 
-<script>
-    let carro = document.getElementById("carro");
-    let puntos = 0;
-    let mensaje = document.getElementById("mensaje");
+    <div id="mensaje"></div>
 
-    let frases = [
-        "Eres mi destino ❤️",
-        "Te amo demasiado 🚗💘",
-        "Tu amor me guía siempre ✨",
-        "Conduces mi corazón 💖",
-        "Eres mi ruta favorita 💞"
-    ];
+    <script>
+        const cajaGanadora = Math.floor(Math.random() * 3) + 1;
 
-    // Movimiento del carro
-    document.addEventListener("mousemove", (e) => {
-        carro.style.left = e.clientX - 40 + "px";
-    });
+        function abrirCaja(numero) {
+            const mensaje = document.getElementById("mensaje");
 
-    // Crear corazones
-    function crearCorazon() {
-        let corazon = document.createElement("img");
-        corazon.src = "https://i.imgur.com/ZKQ7jvM.png";
-        corazon.classList.add("corazon");
-        corazon.style.left = Math.random() * window.innerWidth + "px";
-        document.body.appendChild(corazon);
-
-        let caer = setInterval(() => {
-            let corazonRect = corazon.getBoundingClientRect();
-            let carroRect = carro.getBoundingClientRect();
-
-            // Colisión
-            if (
-                corazonRect.bottom >= carroRect.top &&
-                corazonRect.left < carroRect.right &&
-                corazonRect.right > carroRect.left
-            ) {
-                puntos++;
-                document.getElementById("puntos").innerText = "Puntos: " + puntos;
-                mensaje.innerText = frases[Math.floor(Math.random() * frases.length)];
-                corazon.remove();
-                clearInterval(caer);
+            if (numero === cajaGanadora) {
+                mensaje.innerHTML = "🎉💌 ¡Encontraste el mensaje oculto!<br>“Eres la razón por la que sonrío sin motivo.”";
+                mensaje.style.color = "green";
+            } else {
+                mensaje.innerHTML = "❌ Esta caja está vacía. Intenta de nuevo.";
+                mensaje.style.color = "red";
             }
-
-            // Si desaparece abajo
-            if (corazonRect.top > window.innerHeight) {
-                corazon.remove();
-                clearInterval(caer);
-            }
-        }, 50);
-    }
-
-    setInterval(crearCorazon, 1200);
-</script>
+        }
+    </script>
 
 </body>
 </html>
