@@ -1,119 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de las Monedas del Amor</title>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Carro</title>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url("https://i.imgur.com/ZxInKJc.jpg");
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            color: white;
-            text-shadow: 0 0 5px black;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 30px;
-        }
-
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        #contenedor {
-            display: grid;
-            grid-template-columns: repeat(5, 80px);
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .moneda {
-            width: 70px;
-            height: 70px;
-            background: gold;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 22px;
-            font-weight: bold;
-            color: black;
-            cursor: pointer;
-            border: 3px solid #d4af37;
-            box-shadow: 0 0 10px black;
-            transition: 0.3s;
-        }
-
-        .moneda:hover {
-            transform: scale(1.15);
-            background: rgb(255, 230, 120);
-        }
-
-        #mensaje {
-            margin-top: 30px;
-            font-size: 24px;
-            min-height: 50px;
-            text-align: center;
-            max-width: 80%;
-        }
+        body { margin: 0; overflow: hidden; }
+        canvas { background: url('https://i.imgur.com/8fK4j0v.jpeg') center/cover; display: block; }
     </style>
 </head>
 <body>
+<canvas id="game" width="400" height="600"></canvas>
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
 
-    <h1>🎇 Monedas del Amor en la Noche 🎇</h1>
-    <p>Toca una moneda para descubrir tu destino 💞</p>
+let car = { x: 180, y: 500, width: 50, height: 90, speed: 5 };
+let obstacles = [];
+let gameOver = false;
 
-    <div id="contenedor"></div>
-    <div id="mensaje"></div>
+const carImg = new Image();
+carImg.src = "https://i.imgur.com/W4a9W4F.png"; // Ferrari PNG
 
-    <script>
-        const mensajesLindos = [
-            "Eres lo más bonito de mis días.",
-            "Tu sonrisa ilumina mis noches.",
-            "Eres mi paz en medio del caos.",
-            "Desde que llegaste, todo es mejor.",
-            "Mi mundo tiene sentido contigo.",
-        ];
+const logImg = new Image();
+logImg.src = "https://i.imgur.com/sbGx2FK.png"; // Tronco PNG
 
-        const penitencias = [
-            "Penitencia: me debes un abrazo fuerte.",
-            "Penitencia: me debes un beso.",
-            "Penitencia: me debes un detalle bonito.",
-            "Penitencia: me debes una foto tuya.",
-            "Penitencia: me debes una cita romántica."
-        ];
+function createObstacle() {
+    let x = Math.random() * 350;
+    obstacles.push({ x, y: -100, width: 60, height: 60, speed: 4 });
+}
 
-        const todas = [...mensajesLindos, ...penitencias];
+function resetGame() {
+    obstacles = [];
+    car.x = 180;
+    gameOver = false;
+}
 
-        // Mezclar las 10 opciones
-        todas.sort(() => Math.random() - 0.5);
+setInterval(createObstacle, 1200);
 
-        const contenedor = document.getElementById("contenedor");
-        const mensaje = document.getElementById("mensaje");
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' && car.x > 0) car.x -= car.speed;
+    if (e.key === 'ArrowRight' && car.x < canvas.width - car.width) car.x += car.speed;
+});
 
-        for (let i = 0; i < 10; i++) {
-            const moneda = document.createElement("div");
-            moneda.classList.add("moneda");
-            moneda.textContent = "💰";
+function update() {
+    if (gameOver) return;
 
-            moneda.onclick = () => {
-                mensaje.innerHTML = todas[i].includes("Penitencia")
-                    ? `<span style='color: red; font-weight: bold;'>${todas[i]}</span>`
-                    : `<span style='color: lightgreen;'>${todas[i]}</span>`;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(carImg, car.x, car.y, car.width, car.height);
 
-                moneda.style.transform = "scale(1.2)";
-                moneda.style.background = "silver";
-                moneda.style.pointerEvents = "none";
-            };
+    for (let o of obstacles) {
+        ctx.drawImage(logImg, o.x, o.y, o.width, o.height);
+        o.y += o.speed;
 
-            contenedor.appendChild(moneda);
+        if (
+            car.x < o.x + o.width &&
+            car.x + car.width > o.x &&
+            car.y < o.y + o.height &&
+            car.y + car.height > o.y
+        ) {
+            gameOver = true;
+            alert("¡Te chocaste! Reiniciando...");
+            resetGame();
         }
-    </script>
+    }
 
+    obstacles = obstacles.filter(o => o.y < 650);
+
+    requestAnimationFrame(update);
+}
+
+update();
+</script>
 </body>
 </html>
